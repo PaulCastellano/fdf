@@ -17,11 +17,21 @@
 # include <mlx.h>
 # include <math.h>
 
+typedef struct s_vector
+{
+    int x;
+    int y;
+    int z;
+    int x1;
+    int y1;
+    int z1;
+}               t_vector;
+
 typedef struct  s_kek
 {
-    float x;
-    float y;
-    float z;
+    int x;
+    int y;
+    int z;
 }               t_kek;
 
 typedef struct  s_kekmap
@@ -42,8 +52,9 @@ void        ft_kek(t_kekmap kek);
 void line(int x0, int y0, int x1, int y1, void *mlx_win, void *mlx_ptr);
 void linehigh(int x0, int y0, int x1, int y1, void *mlx_win, void *mlx_ptr);
 void linelow(int x0, int y0, int x1, int y1, void *mlx_win, void *mlx_ptr);
-t_kekmap rot_x(t_kekmap kek);
-t_kekmap rot_y(t_kekmap kek);
-t_kekmap rot_z(t_kekmap kek);
-
+void rot_x(t_vector *kek);
+void rot_y(t_vector *kek);
+void rot_z(t_vector *kek);
+void    scale(t_vector kek, t_kekmap m);
+void    rot(t_kekmap kek);
 #endif
