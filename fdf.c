@@ -6,7 +6,7 @@
 /*   By: egaraz <egaraz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/10 15:36:35 by egaraz            #+#    #+#             */
-/*   Updated: 2018/02/11 02:23:46 by egaraz           ###   ########.fr       */
+/*   Updated: 2018/02/16 23:22:52 by egaraz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,32 +50,32 @@ int         valid_map(char *str, int aux)
     return (1);
 }
 
-t_kek       array(t_kek kek, int col, int ln, int fd, char *s)
+t_kekmap       array(t_kekmap kek, int col, int ln, int fd, char *s)
 {
     char    **str;
     char    *line;
 
     str = NULL;
-    kek.tab = (int **)malloc(ln * sizeof(int *));
-    kek.x = -1;
-    while (++kek.x < col)
-        kek.tab[kek.x] = (int *)malloc(col * sizeof(int));
+    kek.map = (t_kek **)malloc(ln * sizeof(t_kek *));
+    kek.mapx = -1;
+    while (++kek.mapx < col)
+        kek.map[kek.mapx] = (t_kek *)malloc(col * sizeof(t_kek));
     fd = open(s, O_RDONLY);
-    kek.y = 0;
+    kek.mapy = 0;
     while (get_next_line(fd, &line))
     {
         str = ft_strsplit(line, ' ');
-        kek.x = -1;
-        while (str[++kek.x])
-            kek.tab[kek.y][kek.x] = ft_atoi(str[kek.x]);
-        kek.y++;
+        kek.mapx = -1;
+        while (str[++kek.mapx])
+            kek.map[kek.mapy][kek.mapx].z = ft_atoi(str[kek.mapx]);
+        kek.mapy++;
         free(*str);
     }
     free(line);
     return (kek);
 }
 
-t_kek       maloc_array(t_kek kek, char *str)
+t_kekmap       maloc_array(t_kekmap kek, char *str)
 {
     int     fd;
     int     col;
@@ -104,12 +104,12 @@ t_kek       maloc_array(t_kek kek, char *str)
 
 int         main(int n, char **t)
 {
-    t_kek   kek;
-    int     aux;
+    t_kekmap    kek;
+    int         aux;
 
-    kek.x = 0;
-    kek.y = 0;
-    kek.tab = NULL;
+    kek.mapx = 0;
+    kek.mapy = 0;
+    kek.map = NULL;
     if (n != 2)
     {
         if (n == 1)
